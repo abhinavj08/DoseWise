@@ -1,0 +1,26 @@
+# Compiled class files
+out/
+*.class
+
+# JAR files (built locally)
+MediTrack.jar
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+*.code-workspace
+.project
+.classpath
+.settings/
+nbproject/
+build/
+dist/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
