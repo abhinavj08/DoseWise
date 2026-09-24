@@ -1,43 +1,34 @@
 @echo off
 echo ============================================
-echo   MediTrack - Building Application...
+echo   MediTrack / DoseWise - Build Script
 echo ============================================
 
-:: Create output directories
 if not exist "out" mkdir out
 if not exist "lib" mkdir lib
 
-:: Check if MySQL connector exists
-if not exist "lib\mysql-connector-j.jar" (
-    echo.
-    echo [WARNING] MySQL Connector JAR not found!
-    echo Please download it from: https://dev.mysql.com/downloads/connector/j/
-    echo Place the JAR file in the "lib" folder and rename it to "mysql-connector-j.jar"
-    echo.
-    pause
-    exit /b 1
-)
-
-:: Compile all Java files
-echo Compiling Java files...
+echo Compiling Java source files...
 javac -cp "lib\mysql-connector-j.jar" -d out src\model\*.java src\dao\*.java src\service\*.java src\ui\*.java src\Main.java
 
 if %ERRORLEVEL% NEQ 0 (
-    echo.
-    echo [ERROR] Compilation failed! Check for errors above.
+    echo [ERROR] Compilation failed!
     pause
     exit /b 1
 )
 
-:: Create JAR file
-echo Creating MediTrack.jar...
-cd out
-jar cfm ..\MediTrack.jar ..\MANIFEST.MF *.class model\*.class dao\*.class service\*.class ui\*.class
-cd ..
+echo Packaging into MediTrack.jar...
+set JAR_CMD=jar
+where jar >nul 2>nul
+if %ERRORLEVEL% NEQ 0 (
+    if exist "C:\Program Files\Java\jdk-26.0.2\bin\jar.exe" (
+        set "JAR_CMD=C:\Program Files\Java\jdk-26.0.2\bin\jar.exe"
+    )
+)
+
+"%JAR_CMD%" cfm MediTrack.jar MANIFEST.MF -C out .
 
 echo.
 echo ============================================
 echo   Build Successful!
-echo   Run "MediTrack.jar" or double-click "run.bat"
+echo   Double-click run.bat to start the app!
 echo ============================================
 pause
