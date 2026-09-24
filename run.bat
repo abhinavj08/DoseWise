@@ -1,10 +1,12 @@
 @echo off
+title MediTrack - DoseWise
+cd /d "%~dp0"
 echo ===================================================
 echo   Starting DoseWise / MediTrack Application...
 echo ===================================================
-java -cp "MediTrack.jar;lib\mysql-connector-j.jar;out" Main
+java -cp "out;lib\mysql-connector-j.jar;MediTrack.jar" Main
 if %ERRORLEVEL% NEQ 0 (
     echo.
-    echo [ERROR] Application failed to launch.
+    echo [ERROR] Application encountered an error or stopped.
     pause
 )

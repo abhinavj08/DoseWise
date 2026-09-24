@@ -46,6 +46,7 @@ public class LoginFrame extends JFrame {
         mainPanel.add(cardPanel, BorderLayout.CENTER);
 
         add(mainPanel);
+        setVisible(true);
     }
 
     private JPanel createHeaderPanel() {
