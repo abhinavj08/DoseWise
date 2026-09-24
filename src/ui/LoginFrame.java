@@ -46,7 +46,6 @@ public class LoginFrame extends JFrame {
         mainPanel.add(cardPanel, BorderLayout.CENTER);
 
         add(mainPanel);
-        setVisible(true);
     }
 
     private JPanel createHeaderPanel() {
@@ -176,6 +175,7 @@ public class LoginFrame extends JFrame {
 
         User user = userDAO.loginUser(email, password);
         if (user != null) {
+            service.SessionManager.saveSession(user.getUserId());
             JOptionPane.showMessageDialog(this, "Welcome back, " + user.getName() + "!", "Login Successful", JOptionPane.INFORMATION_MESSAGE);
             dispose();
             new DashboardFrame(user);

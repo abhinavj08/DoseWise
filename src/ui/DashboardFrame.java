@@ -206,6 +206,7 @@ public class DashboardFrame extends JFrame {
     private void handleLogout() {
         int choice = JOptionPane.showConfirmDialog(this, "Are you sure you want to logout?", "Logout", JOptionPane.YES_NO_OPTION);
         if (choice == JOptionPane.YES_OPTION) {
+            service.SessionManager.clearSession();
             reminderService.stopReminderChecker();
             dispose();
             LoginFrame loginFrame = new LoginFrame();

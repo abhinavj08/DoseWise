@@ -8,7 +8,7 @@ public class DBConnection {
 
     private static final String URL = "jdbc:mysql://localhost:3306/meditrack";
     private static final String USER = "root";
-    private static final String PASSWORD = "08092005";
+    private static final String PASSWORD = "root";
 
     static {
         try {
